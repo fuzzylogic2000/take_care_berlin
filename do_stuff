@@ -1,0 +1,81 @@
+~$ mkdir take_care
+~$ cd take_care/
+~/take_care$ mkvirtualenv -p /usr/bin/python3.4 take_care
+
+~/take_care$ pip freeze
+~/take_care$ pip install django==1.7
+Downloading/unpacking django==1.7
+  Downloading Django-1.7-py2.py3-none-any.whl (7.4MB): 7.4MB downloaded
+Installing collected packages: django
+Successfully installed django
+Cleaning up...
+~/take_care$ pip freeze
+Django==1.7
+
+~/take_care$ django-admin.py startproject take_care .
+~/take_care$ tree
+.
+├── manage.py
+├── README
+└── take_care
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+
+1 directory, 6 files
+
+~/take_care$ python manage.py migrate
+
+~/take_care$ python manage.py startapp take_care_app
+~/take_care$ tree
+.
+├── db.sqlite3
+├── manage.py
+├── README
+├── take_care
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-34.pyc
+│   │   └── settings.cpython-34.pyc
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── take_care_app
+    ├── admin.py
+    ├── __init__.py
+    ├── migrations
+    │   └── __init__.py
+    ├── models.py
+    ├── tests.py
+    └── views.py
+
+4 directories, 15 files
+
+#put app into settings
+#create model
+
+~/take_care$ python manage.py makemigrations take_care_app
+Migrations for 'take_care_app':
+  0001_initial.py:
+    - Create model KiTa
+~/take_care$ python manage.py migrate take_care_app
+Operations to perform:
+  Apply all migrations: take_care_app
+Running migrations:
+  Applying take_care_app.0001_initial... OK
+
+
+~/take_care$ python manage.py shell
+Python 3.4.0 (default, Apr 11 2014, 13:05:11) 
+[GCC 4.8.2] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from take_care_app.models import KiTa
+>>> KiTa.objects.all()
+[]
+>>> KiTa.objects.create(kita_name = 'Kita Müggelstraße/Pfefferwerk Stadtkultur gGmbH', traeger = 'Pfefferwerk Stadtkultur gGmbH', adresse = 'Müggelstraße 19/20', plz_stadt = '10247 Berlin', bezirk = 'Friedrichshain-Kreuzberg', lat = 52.5099526, lon = 13.4690268, telefon = 0302946552, email = 'kita-mueggelstrasse@pfefferwerk.de', link = 'http://www.pfefferwerk.de/pfefferwerk/index.php/kitas-kreuzberg/kita-mueggelstrasse', beschreibung = 'Situationsansatz')
+
+# too much! model geändert auf Name, lat & lon
+# again:
+>>> KiTa.objects.create(kita_name = 'Kita Müggelstraße/Pfefferwerk Stadtkultur gGmbH', lat = 52.5099526, lon = 13.4690268)

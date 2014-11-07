@@ -1,0 +1,11 @@
+{% extends 'take_care_app/base.html' %}
+
+{% block content %}
+    {% for kita in kitas %}
+        <div class="kita">
+            <h1><a href="">{{ kita.kita_name }}</a></h1>
+            <p>lat: {{ kita.lat }}</p>
+            <p>lon: {{ kita.lon }}</p>
+        </div>
+    {% endfor %}
+{% endblock content %}
