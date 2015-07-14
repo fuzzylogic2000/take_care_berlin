@@ -51,3 +51,5 @@ h1, h2, h3, h4 {
 .kita h1 a, .kita h1 a:visited {
     color: #F52887;
 }
+
+#map { height: 540px; }

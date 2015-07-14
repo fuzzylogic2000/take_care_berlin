@@ -1,11 +1,24 @@
 {% extends 'take_care_app/base.html' %}
 
-{% block content %}
+{% block map %}
+
+    <div id="map"></div>
+
+    <script type="text/javascript">
+        var map = L.map('map').setView([52.5099, 13.469], 13);
+
+        L.tileLayer('http://{s}.tiles.mapbox.com/v3/hatschito.ib02mpee/{z}/{x}/{y}.png', {
+        maxZoom: 18
+        }).addTo(map);
+        {% for kita in kitas %}
+        var marker = L.marker([{{ kita.lat }}, {{ kita.lon }}]).addTo(map).bindPopup("<a href={% url 'take_care_app.views.kita_detail' pk=kita.pk %}>{{ kita.kita_name }}</a>");
+        {% endfor %}
+    </script>
+
     {% for kita in kitas %}
-        <div class="kita">
-            <h1><a href="">{{ kita.kita_name }}</a></h1>
-            <p>lat: {{ kita.lat }}</p>
-            <p>lon: {{ kita.lon }}</p>
-        </div>
+    <script type="text/javascript">
+        var marker = L.marker([{{ kita.lat }}, {{ kita.lon }}]).addTo(map).bindPopup(<a href="{% url 'take_care_app.views.kita_detail' pk=kita.pk %}">{{ kita.kita_name }}</a>);
+        </script>
     {% endfor %}
-{% endblock content %}
+
+{% endblock map %}

@@ -1,0 +1,19 @@
+{% extends 'take_care_app/base.html' %}
+
+{% block content %}
+    <h1>{{ kita.kita_name }}</h1>
+    <p>{{ kita.traeger }}</p>
+
+    <p>{{ kita.adresse }}</p>
+    <p>{{ kita.plz_stadt }}</p>
+    <p>{{ kita.bezirk }}</p>
+
+    <p>{{ kita.lat }}</p>
+    <p>{{ kita.lon }}</p>
+
+    <p>{{ kita.telefon }}</p>
+    <p><a href="mailto:{{ kita.email }}">{{ kita.email }}</a></p>
+    <p><a href="{{ kita.link }}">{{ kita.link }}</a></p>
+
+    <p>{{ kita.beschreibung }}</p>
+{% endblock %}
